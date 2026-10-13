@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sydney &amp; Joseph | June 12, 2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #ffffff;
+    --off-white: #fbfbf8;
+    --cream: #f6f7f2;
+    --green: #4a6741;
+    --green-deep: #39502f;
+    --green-pale: #eef2e9;
+    --green-line: #c7d4bd;
+    --text: #2b2e27;
+    --text-muted: #6b6f63;
+    --gold: #b8a369;
+    --shadow: 0 20px 60px rgba(43, 62, 39, 0.12);
+    --radius: 2px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: 'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    color: var(--text);
+    background: var(--white);
+    font-weight: 300;
+    letter-spacing: 0.01em;
+  }
+
+  h1, h2, h3, .serif {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  a { text-decoration: none; color: inherit; }
+
+  img { max-width: 100%; display: block; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* -------- Nav -------- */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.0);
+    transition: background 0.35s ease, box-shadow 0.35s ease, padding 0.35s ease;
+    padding: 26px 0;
+  }
+  .nav.scrolled {
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 2px 24px rgba(43,62,39,0.06);
+    padding: 14px 0;
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-mono {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    letter-spacing: 0.08em;
+    color: var(--white);
+    transition: color 0.35s ease;
+  }
+  .nav.scrolled .nav-mono { color: var(--green-deep); }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-links a {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--white);
+    transition: color 0.35s ease, opacity 0.2s ease;
+    opacity: 0.9;
+  }
+  .nav-links a:hover { opacity: 1; }
+  .nav.scrolled .nav-links a { color: var(--text); }
+
+  @media (max-width: 680px) {
+    .nav-links { gap: 18px; }
+    .nav-links a { font-size: 11px; }
+  }
+
+  /* -------- Hero -------- */
+  .hero {
+    position: relative;
+    width: 100%;
+    line-height: 0;
+    overflow: hidden;
+    background: var(--green-deep);
+  }
+  .hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .hero-gradient-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 360px;
+    background: linear-gradient(180deg, rgba(14,20,11,0.68) 0%, rgba(14,20,11,0.3) 55%, rgba(14,20,11,0) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .hero-gradient-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 300px;
+    background: linear-gradient(180deg, rgba(14,20,11,0) 0%, rgba(14,20,11,0.32) 45%, rgba(14,20,11,0.82) 100%);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .hero-caption-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 148px 24px 0;
+    color: var(--white);
+    z-index: 2;
+    line-height: normal;
+  }
+  .hero-eyebrow {
+    font-size: 13px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    opacity: 0.92;
+    margin-bottom: 18px;
+    line-height: 1.4;
+  }
+  .hero-names {
+    font-size: clamp(42px, 7vw, 88px);
+    line-height: 1.05;
+    margin: 0;
+    font-weight: 500;
+    color: var(--white);
+  }
+  .hero-amp {
+    display: inline-block;
+    font-style: italic;
+    color: #dce7c9;
+    margin: 0 14px;
+    font-size: 0.75em;
+  }
+  .hero-divider {
+    width: 70px;
+    height: 1px;
+    background: rgba(255,255,255,0.55);
+    margin: 24px auto;
+  }
+  .hero-date {
+    font-size: 17px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    opacity: 0.95;
+    line-height: 1.4;
+  }
+  .hero-sub {
+    margin-top: 10px;
+    font-size: 15px;
+    opacity: 0.8;
+    letter-spacing: 0.08em;
+    line-height: 1.4;
+  }
+  .hero-schedule {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2;
+    text-align: center;
+    color: var(--white);
+    padding: 48px 24px 56px;
+    line-height: normal;
+  }
+  .hero-schedule-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    margin-bottom: 26px;
+    line-height: 1.4;
+  }
+  .hero-schedule-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .hero-schedule-item { min-width: 110px; }
+  .hero-schedule-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    opacity: 0.78;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .hero-schedule-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 23px;
+    line-height: 1.3;
+  }
+  .hero-schedule-divider {
+    width: 1px;
+    height: 36px;
+    background: rgba(255,255,255,0.32);
+  }
+  /* -------- Section shared -------- */
+  section {
+    padding: 120px 0;
+  }
+  .section-head {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+  .section-eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-size: clamp(34px, 5vw, 48px);
+    margin: 0 0 18px;
+    color: var(--text);
+  }
+  .section-lede {
+    max-width: 560px;
+    margin: 0 auto;
+    color: var(--text-muted);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  .leaf-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin: 0 auto 0;
+  }
+  .leaf-divider .line {
+    width: 44px;
+    height: 1px;
+    background: var(--green-line);
+  }
+  .leaf-divider svg { width: 16px; height: 16px; color: var(--green); }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* -------- Location -------- */
+  .location {
+    background: var(--green-pale);
+  }
+  .location-grid {
+    display: flex;
+    justify-content: center;
+  }
+  .venue-card {
+    background: var(--white);
+    border-radius: 6px;
+    padding: 56px 60px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    max-width: 560px;
+    width: 100%;
+  }
+  @media (max-width: 600px) {
+    .venue-card { padding: 44px 28px; }
+  }
+  .crest {
+    width: 86px;
+    height: 86px;
+    margin: 0 auto 22px;
+    color: var(--green);
+  }
+  .venue-name {
+    font-size: 30px;
+    margin: 0 0 6px;
+  }
+  .venue-sub {
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 26px;
+  }
+  .venue-address {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  .venue-note {
+    font-size: 14px;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+  .btn {
+    display: inline-block;
+    padding: 14px 34px;
+    border: 1px solid var(--green);
+    color: var(--green-deep);
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    border-radius: 2px;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+  .btn:hover { background: var(--green); color: var(--white); }
+  .btn-solid {
+    background: var(--green);
+    color: var(--white);
+    border: 1px solid var(--green);
+  }
+  .btn-solid:hover { background: var(--green-deep); border-color: var(--green-deep); }
+
+  /* -------- Gallery -------- */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 24px;
+  }
+  @media (max-width: 760px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+  }
+  .gallery-grid figure {
+    margin: 0;
+    overflow: hidden;
+    border-radius: 6px;
+    box-shadow: var(--shadow);
+  }
+  .gallery-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+  }
+  .gallery-grid figure:hover img { transform: scale(1.04); }
+  .gallery-tall { height: 640px; }
+  .gallery-short { height: 640px; }
+
+  /* -------- RSVP -------- */
+  .rsvp {
+    background: var(--green-deep);
+    color: var(--white);
+    position: relative;
+  }
+  .rsvp .section-eyebrow { color: #cfe0c0; }
+  .rsvp .section-title { color: var(--white); }
+  .rsvp .section-lede { color: rgba(255,255,255,0.78); }
+  .rsvp-card {
+    max-width: 560px;
+    margin: 0 auto;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 8px;
+    padding: 48px;
+    backdrop-filter: blur(2px);
+  }
+  @media (max-width: 600px) {
+    .rsvp-card { padding: 32px 24px; }
+  }
+  .form-row { margin-bottom: 22px; display: flex; flex-direction: column; gap: 8px; }
+  .form-row label {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+  }
+  .form-row input, .form-row select {
+    background: rgba(255,255,255,0.95);
+    border: none;
+    border-radius: 3px;
+    padding: 13px 16px;
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+    color: var(--text);
+  }
+  .form-row input:focus, .form-row select:focus {
+    outline: 2px solid var(--gold);
+  }
+  .form-submit {
+    width: 100%;
+    margin-top: 6px;
+    padding: 15px;
+    border: 1px solid var(--white);
+    background: var(--white);
+    color: var(--green-deep);
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+  .form-submit:hover { background: transparent; color: var(--white); }
+  .rsvp-success {
+    display: none;
+    text-align: center;
+    padding: 10px 0 4px;
+  }
+  .rsvp-success.show { display: block; }
+  .rsvp-success svg { width: 42px; height: 42px; color: #cfe0c0; margin-bottom: 14px; }
+  .rsvp-note {
+    text-align: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    margin-top: 22px;
+  }
+
+  /* -------- FAQ -------- */
+  .faq-list {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .faq-item {
+    border-bottom: 1px solid var(--green-line);
+  }
+  .faq-q {
+    width: 100%;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 24px 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 21px;
+    color: var(--text);
+  }
+  .faq-q .plus {
+    font-size: 22px;
+    color: var(--green);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+    margin-left: 18px;
+  }
+  .faq-item.open .faq-q .plus { transform: rotate(135deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease, padding 0.4s ease;
+    font-size: 15.5px;
+    line-height: 1.75;
+    color: var(--text-muted);
+    padding: 0 4px;
+  }
+  .faq-item.open .faq-a {
+    padding: 0 4px 26px;
+  }
+
+  /* -------- Footer -------- */
+  footer {
+    background: var(--cream);
+    padding: 56px 0 36px;
+    text-align: center;
+  }
+  .footer-mono {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    color: var(--green-deep);
+    margin-bottom: 10px;
+  }
+  .footer-date {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 26px;
+  }
+  .footer-fine {
+    font-size: 12px;
+    color: #9a9d8f;
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="siteNav">
+  <div class="container nav-inner">
+    <a href="#top" class="nav-mono">S &amp; J</a>
+    <ul class="nav-links">
+      <li><a href="#location">Location</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#rsvp">RSVP</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <img class="hero-image" src="images/photo3-hero.jpg" alt="Sydney and Joseph" />
+  <div class="hero-gradient-top"></div>
+  <div class="hero-gradient-bottom"></div>
+  <div class="hero-caption-top">
+    <div class="hero-eyebrow">We're Getting Married</div>
+    <h1 class="hero-names">Sydney<span class="hero-amp">&amp;</span>Joseph</h1>
+    <div class="hero-divider"></div>
+    <div class="hero-date">Saturday · June 12, 2027</div>
+    <div class="hero-sub">The Country Club of Darien &nbsp;·&nbsp; Darien, Connecticut</div>
+  </div>
+  <div class="hero-schedule">
+    <div class="hero-schedule-eyebrow">The Celebration</div>
+    <div class="hero-schedule-row">
+      <div class="hero-schedule-item">
+        <div class="hero-schedule-label">Ceremony</div>
+        <div class="hero-schedule-value">4:00 PM</div>
+      </div>
+      <span class="hero-schedule-divider"></span>
+      <div class="hero-schedule-item">
+        <div class="hero-schedule-label">Cocktail Hour</div>
+        <div class="hero-schedule-value">5:00 PM</div>
+      </div>
+      <span class="hero-schedule-divider"></span>
+      <div class="hero-schedule-item">
+        <div class="hero-schedule-label">Reception</div>
+        <div class="hero-schedule-value">6:30 &ndash; 10:00 PM</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="location" id="location">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Join Us</div>
+      <h2 class="section-title">The Venue</h2>
+      <div class="leaf-divider">
+        <span class="line"></span>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c-4 3-7 7-7 11a7 7 0 0 0 14 0c0-4-3-8-7-11zm0 3.2c2.6 2.3 4.5 5.1 4.5 7.8a4.5 4.5 0 0 1-9 0c0-2.7 1.9-5.5 4.5-7.8z"/></svg>
+        <span class="line"></span>
+      </div>
+    </div>
+
+    <div class="location-grid">
+      <div class="venue-card reveal">
+        <svg class="crest" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="1.4">
+          <circle cx="50" cy="50" r="42"/>
+          <circle cx="50" cy="50" r="35"/>
+          <path d="M50 20c-9 7-16 16-16 26a16 16 0 0 0 32 0c0-10-7-19-16-26z" fill="currentColor" stroke="none" opacity="0.14"/>
+          <path d="M50 20c-9 7-16 16-16 26a16 16 0 0 0 32 0c0-10-7-19-16-26z"/>
+          <text x="50" y="76" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="13" letter-spacing="2" fill="currentColor" stroke="none">S &amp; J</text>
+        </svg>
+        <h3 class="venue-name">The Country Club of Darien</h3>
+        <div class="venue-sub">Est. Private Club &nbsp;·&nbsp; Darien, CT</div>
+        <p class="venue-address">
+          300 Mansfield Avenue<br>
+          Darien, Connecticut 06820
+        </p>
+        <p class="venue-note">
+          Ceremony on the lawn overlooking the Sound, followed by cocktail hour on the terrace and dinner &amp; dancing in the clubhouse ballroom.
+        </p>
+        <a class="btn" href="https://www.google.com/maps/search/?api=1&query=Country+Club+of+Darien+300+Mansfield+Avenue+Darien+CT+06820" target="_blank" rel="noopener">Get Directions</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">A Few Favorites</div>
+      <h2 class="section-title">Gallery</h2>
+      <div class="leaf-divider">
+        <span class="line"></span>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c-4 3-7 7-7 11a7 7 0 0 0 14 0c0-4-3-8-7-11zm0 3.2c2.6 2.3 4.5 5.1 4.5 7.8a4.5 4.5 0 0 1-9 0c0-2.7 1.9-5.5 4.5-7.8z"/></svg>
+        <span class="line"></span>
+      </div>
+    </div>
+    <div class="gallery-grid">
+      <figure class="gallery-tall reveal">
+        <img src="images/photo1.jpg" alt="Sydney and Joseph at Bethesda Terrace" />
+      </figure>
+      <figure class="gallery-short reveal">
+        <img src="images/photo2.jpg" alt="Sydney and Joseph sharing a laugh" />
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="rsvp" id="rsvp">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Kindly Respond</div>
+      <h2 class="section-title">RSVP</h2>
+      <p class="section-lede">We can't wait to celebrate with you. Please let us know if you'll be joining us by May 1, 2027.</p>
+    </div>
+
+    <div class="rsvp-card reveal">
+      <form id="rsvpForm">
+        <div class="form-row">
+          <label for="fullName">Full Name</label>
+          <input type="text" id="fullName" name="fullName" placeholder="Jane Doe" required />
+        </div>
+        <div class="form-row">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" placeholder="jane@example.com" required />
+        </div>
+        <div class="form-row">
+          <label for="attending">Will You Attend?</label>
+          <select id="attending" name="attending">
+            <option value="joyfully-accept">Joyfully Accepts</option>
+            <option value="regretfully-decline">Regretfully Declines</option>
+          </select>
+        </div>
+        <button type="submit" class="form-submit">Send RSVP</button>
+      </form>
+      <div class="rsvp-success" id="rsvpSuccess">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M8 12l3 3 5-6"/></svg>
+        <div class="serif" style="font-size:22px;">Thank you!</div>
+        <div style="font-size:14px; color:rgba(255,255,255,0.75); margin-top:6px;">Your RSVP has been noted. We can't wait to celebrate with you.</div>
+      </div>
+      <div class="rsvp-note">This form is a placeholder for now &mdash; responses aren't submitted anywhere yet.</div>
+    </div>
+  </div>
+</section>
+
+<section class="faq" id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Good To Know</div>
+      <h2 class="section-title">Frequently Asked Questions</h2>
+      <div class="leaf-divider">
+        <span class="line"></span>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c-4 3-7 7-7 11a7 7 0 0 0 14 0c0-4-3-8-7-11zm0 3.2c2.6 2.3 4.5 5.1 4.5 7.8a4.5 4.5 0 0 1-9 0c0-2.7 1.9-5.5 4.5-7.8z"/></svg>
+        <span class="line"></span>
+      </div>
+    </div>
+
+    <div class="faq-list reveal">
+      <div class="faq-item open">
+        <button class="faq-q"><span>What is the dress code?</span><span class="plus">+</span></button>
+        <div class="faq-a">Garden formal. Think your favorite cocktail dress or a suit in seasonal colors &mdash; the ceremony and cocktail hour are outdoors on the lawn, so please plan footwear accordingly.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Is there parking at the venue?</span><span class="plus">+</span></button>
+        <div class="faq-a">Yes, complimentary valet parking will be available for all guests at the main entrance of the Country Club of Darien.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Are children welcome?</span><span class="plus">+</span></button>
+        <div class="faq-a">We love your little ones, but we've decided to make our wedding an adults-only celebration so parents can relax and enjoy the night too.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>Is there a hotel block for out-of-town guests?</span><span class="plus">+</span></button>
+        <div class="faq-a">Yes &mdash; we've reserved a room block at a nearby hotel in Darien. Details and booking links will be added here soon.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>What time should we arrive?</span><span class="plus">+</span></button>
+        <div class="faq-a">Please plan to be seated by 3:45 PM so we can begin the ceremony promptly at 4:00 PM.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q"><span>What's the best way to get us a gift?</span><span class="plus">+</span></button>
+        <div class="faq-a">Your presence is truly the only present we need. For those who'd still like to, a registry will be shared closer to the date.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-mono">Sydney &amp; Joseph</div>
+    <div class="footer-date">June 12, 2027 &nbsp;&middot;&nbsp; Darien, Connecticut</div>
+    <div class="footer-fine">Made with love for our wedding day.</div>
+  </div>
+</footer>
+
+<script>
+  // Nav background on scroll
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 60) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+
+  // FAQ accordion
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      item.classList.toggle('open');
+    });
+  });
+
+  // RSVP form (placeholder, no backend yet)
+  const rsvpForm = document.getElementById('rsvpForm');
+  const rsvpSuccess = document.getElementById('rsvpSuccess');
+  rsvpForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    rsvpForm.style.display = 'none';
+    rsvpSuccess.classList.add('show');
+  });
+</script>
+
+</body>
+</html>
