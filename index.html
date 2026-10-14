@@ -395,20 +395,99 @@
   .rsvp .section-title { color: var(--white); }
   .rsvp .section-lede { color: rgba(255,255,255,0.78); }
   .rsvp-card {
-    max-width: 720px;
+    max-width: 560px;
     margin: 0 auto;
-    background: var(--white);
-    border: 1px solid rgba(255,255,255,0.35);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.18);
     border-radius: 8px;
-    overflow: hidden;
-    box-shadow: var(--shadow);
+    padding: 48px;
+    backdrop-filter: blur(2px);
   }
-  .rsvp-embed {
-    display: block;
-    width: 100%;
-    height: 1500px;
+  @media (max-width: 600px) {
+    .rsvp-card { padding: 32px 24px; }
+  }
+  .form-row { margin-bottom: 22px; display: flex; flex-direction: column; gap: 8px; }
+  .form-row > label {
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.82);
+  }
+  .form-choice-group {
     border: 0;
+    padding: 0;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  .form-choice-group legend {
+    margin-bottom: 8px;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.82);
+  }
+  .form-row input[type="text"] {
+    width: 100%;
+    background: rgba(255,255,255,0.95);
+    border: none;
+    border-radius: 3px;
+    padding: 13px 16px;
+    font-family: 'Jost', sans-serif;
+    font-size: 16px;
+    color: var(--text);
+  }
+  .form-row input:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 2px;
+  }
+  .attendance-options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .attendance-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 16px;
+    border: 1px solid rgba(255,255,255,0.4);
+    border-radius: 3px;
+    color: var(--white);
+    cursor: pointer;
+  }
+  .attendance-option:has(input:checked) {
+    background: rgba(255,255,255,0.14);
+    border-color: var(--white);
+  }
+  .attendance-option input {
+    width: 17px;
+    height: 17px;
+    margin: 0;
+    accent-color: var(--white);
+  }
+  .form-submit {
+    width: 100%;
+    margin-top: 6px;
+    padding: 15px;
+    border: 1px solid var(--white);
     background: var(--white);
+    color: var(--green-deep);
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+  .form-submit:hover { background: transparent; color: var(--white); }
+  .form-submit:disabled { opacity: 0.7; cursor: wait; }
+  .rsvp-status {
+    margin-top: 20px;
+    color: rgba(255,255,255,0.9);
+    font-size: 15px;
+    line-height: 1.6;
+    text-align: center;
   }
   .rsvp-note {
     text-align: center;
@@ -420,10 +499,14 @@
     text-decoration: underline;
     text-underline-offset: 3px;
   }
-  @media (max-width: 600px) {
-    .rsvp-embed { height: 1700px; }
+  .rsvp-submit-frame {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    border: 0;
+    clip-path: inset(50%);
+    overflow: hidden;
   }
-
   /* -------- FAQ -------- */
   .faq-list {
     max-width: 720px;
@@ -676,14 +759,42 @@
     </div>
 
     <div class="rsvp-card reveal">
-      <iframe
-        class="rsvp-embed"
-        src="https://docs.google.com/forms/d/e/1FAIpQLSd9ocE9vDcaL96Im5RBtRS-nXeFgr4v2BUT2B9rVKylTQcZsg/viewform?embedded=true"
-        title="Wedding RSVP form"
-        loading="lazy"
-      >Loading the RSVP form&hellip;</iframe>
+      <form
+        id="rsvpForm"
+        action="https://docs.google.com/forms/d/e/1FAIpQLSd9ocE9vDcaL96Im5RBtRS-nXeFgr4v2BUT2B9rVKylTQcZsg/formResponse"
+        method="post"
+        target="rsvp-submit-frame"
+      >
+        <div class="form-row">
+          <label for="rsvpNames">Full Name(s)</label>
+          <input
+            type="text"
+            id="rsvpNames"
+            name="entry.1025580639"
+            autocomplete="name"
+            placeholder="Your name(s)"
+            required
+          />
+        </div>
+        <fieldset class="form-row form-choice-group">
+          <legend>Will you be attending?</legend>
+          <div class="attendance-options">
+            <label class="attendance-option">
+              <input type="radio" name="entry.649465953" value="Yes" required />
+              <span>Yes</span>
+            </label>
+            <label class="attendance-option">
+              <input type="radio" name="entry.649465953" value="No" />
+              <span>No</span>
+            </label>
+          </div>
+        </fieldset>
+        <button type="submit" class="form-submit">Send RSVP</button>
+      </form>
+      <p class="rsvp-status" id="rsvpStatus" role="status" aria-live="polite" hidden></p>
     </div>
-    <p class="rsvp-note">If the form doesn't appear, <a href="https://docs.google.com/forms/d/e/1FAIpQLSd9ocE9vDcaL96Im5RBtRS-nXeFgr4v2BUT2B9rVKylTQcZsg/viewform" target="_blank" rel="noopener">open the RSVP form in a new tab</a>.</p>
+    <iframe class="rsvp-submit-frame" name="rsvp-submit-frame" title="RSVP submission" tabindex="-1" aria-hidden="true"></iframe>
+    <p class="rsvp-note">Your response will be submitted to Google Forms. <a href="https://docs.google.com/forms/d/e/1FAIpQLSd9ocE9vDcaL96Im5RBtRS-nXeFgr4v2BUT2B9rVKylTQcZsg/viewform" target="_blank" rel="noopener">Open the Google Form instead</a>.</p>
   </div>
 </section>
 
@@ -793,6 +904,34 @@
       const item = btn.closest('.faq-item');
       item.classList.toggle('open');
     });
+  });
+
+  const rsvpForm = document.getElementById('rsvpForm');
+  const rsvpSubmitFrame = document.querySelector('.rsvp-submit-frame');
+  const rsvpStatus = document.getElementById('rsvpStatus');
+  const rsvpSubmitButton = rsvpForm.querySelector('.form-submit');
+  let rsvpSubmissionPending = false;
+  let rsvpSubmissionTimeout;
+
+  rsvpForm.addEventListener('submit', () => {
+    rsvpSubmissionPending = true;
+    rsvpSubmitButton.disabled = true;
+    rsvpStatus.hidden = false;
+    rsvpStatus.textContent = 'Sending your RSVP…';
+    rsvpSubmissionTimeout = window.setTimeout(() => {
+      if (!rsvpSubmissionPending) return;
+      rsvpSubmissionPending = false;
+      rsvpSubmitButton.disabled = false;
+      rsvpStatus.textContent = 'We couldn’t confirm your submission. Please try again or use the Google Form link below.';
+    }, 15000);
+  });
+
+  rsvpSubmitFrame.addEventListener('load', () => {
+    if (!rsvpSubmissionPending) return;
+    rsvpSubmissionPending = false;
+    window.clearTimeout(rsvpSubmissionTimeout);
+    rsvpForm.hidden = true;
+    rsvpStatus.textContent = 'Thank you! Your RSVP has been submitted.';
   });
 
 </script>
