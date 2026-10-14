@@ -357,27 +357,42 @@
   /* -------- Gallery -------- */
   .gallery-grid {
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 24px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: center;
+    gap: 30px;
   }
   @media (max-width: 760px) {
     .gallery-grid { grid-template-columns: 1fr; }
   }
-  .gallery-grid figure {
+  .gallery-card {
     margin: 0;
-    overflow: hidden;
-    border-radius: 6px;
-    box-shadow: var(--shadow);
   }
-  .gallery-grid img {
+  .polaroid {
+    padding: 12px 12px 18px;
+    background: var(--white);
+    box-shadow: 0 14px 32px rgba(43, 62, 39, 0.18);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .gallery-card:nth-child(1) .polaroid { transform: rotate(-3deg); }
+  .gallery-card:nth-child(2) .polaroid { transform: rotate(2deg); }
+  .gallery-card:nth-child(3) .polaroid { transform: rotate(-2deg); }
+  .gallery-card:hover .polaroid {
+    transform: rotate(0) translateY(-6px);
+    box-shadow: 0 20px 38px rgba(43, 62, 39, 0.22);
+  }
+  .polaroid img {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 4 / 5;
     object-fit: cover;
-    transition: transform 0.7s ease;
   }
-  .gallery-grid figure:hover img { transform: scale(1.04); }
-  .gallery-tall { height: 640px; }
-  .gallery-short { height: 640px; }
+  .polaroid figcaption {
+    padding-top: 14px;
+    text-align: center;
+    color: var(--green-deep);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 20px;
+    font-style: italic;
+  }
 
   /* -------- RSVP -------- */
   .rsvp {
@@ -604,9 +619,9 @@
     .venue-card { padding: 38px 22px; }
     .venue-name { font-size: clamp(25px, 7vw, 30px); }
     .venue-address { font-size: 15px; }
-    .gallery-grid { gap: 18px; }
-    .gallery-tall,
-    .gallery-short { height: clamp(360px, 120vw, 500px); }
+    .gallery-grid { gap: 28px; }
+    .polaroid { padding: 10px 10px 16px; }
+    .polaroid figcaption { padding-top: 12px; font-size: 19px; }
     .rsvp-card { padding: 32px 22px; }
     .faq-q { font-size: 19px; }
     .faq-q > span:first-child { min-width: 0; }
@@ -625,8 +640,8 @@
     <a href="#top" class="nav-mono">S &amp; J</a>
     <ul class="nav-links">
       <li><a href="#location">Location</a></li>
-      <li><a href="#gallery">Gallery</a></li>
       <li><a href="#rsvp">RSVP</a></li>
+      <li><a href="#gallery">Gallery</a></li>
       <li><a href="#faq">FAQ</a></li>
     </ul>
   </div>
@@ -693,28 +708,6 @@
   </div>
 </section>
 
-<section class="gallery" id="gallery">
-  <div class="container">
-    <div class="section-head reveal">
-      <div class="section-eyebrow">A Few Favorites</div>
-      <h2 class="section-title">Gallery</h2>
-      <div class="leaf-divider">
-        <span class="line"></span>
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c-4 3-7 7-7 11a7 7 0 0 0 14 0c0-4-3-8-7-11zm0 3.2c2.6 2.3 4.5 5.1 4.5 7.8a4.5 4.5 0 0 1-9 0c0-2.7 1.9-5.5 4.5-7.8z"/></svg>
-        <span class="line"></span>
-      </div>
-    </div>
-    <div class="gallery-grid">
-      <figure class="gallery-tall reveal">
-        <img src="images/photo1.jpg" alt="Sydney and Joseph at Bethesda Terrace" />
-      </figure>
-      <figure class="gallery-short reveal">
-        <img src="images/photo2.jpg" alt="Sydney and Joseph sharing a laugh" />
-      </figure>
-    </div>
-  </div>
-</section>
-
 <section class="rsvp" id="rsvp">
   <div class="container">
     <div class="section-head reveal">
@@ -748,6 +741,40 @@
         <div style="font-size:14px; color:rgba(255,255,255,0.75); margin-top:6px;">Your RSVP has been noted. We can't wait to celebrate with you.</div>
       </div>
       <div class="rsvp-note">This form is a placeholder for now &mdash; responses aren't submitted anywhere yet.</div>
+    </div>
+  </div>
+</section>
+
+<section class="gallery" id="gallery">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">A Few Favorites</div>
+      <h2 class="section-title">Gallery</h2>
+      <div class="leaf-divider">
+        <span class="line"></span>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c-4 3-7 7-7 11a7 7 0 0 0 14 0c0-4-3-8-7-11zm0 3.2c2.6 2.3 4.5 5.1 4.5 7.8a4.5 4.5 0 0 1-9 0c0-2.7 1.9-5.5 4.5-7.8z"/></svg>
+        <span class="line"></span>
+      </div>
+    </div>
+    <div class="gallery-grid">
+      <figure class="gallery-card reveal">
+        <div class="polaroid">
+          <img src="images/gallery-1.jpg" alt="Sydney and Joseph walking hand in hand at Bethesda Terrace" loading="lazy" />
+          <figcaption>Sydney &amp; Joseph</figcaption>
+        </div>
+      </figure>
+      <figure class="gallery-card reveal">
+        <div class="polaroid">
+          <img src="images/gallery-2.jpg" alt="Sydney and Joseph sharing a sunlit moment at Bethesda Terrace" loading="lazy" />
+          <figcaption>Sydney &amp; Joseph</figcaption>
+        </div>
+      </figure>
+      <figure class="gallery-card reveal">
+        <div class="polaroid">
+          <img src="images/gallery-3.jpg" alt="Sydney and Joseph together at Bethesda Terrace" loading="lazy" />
+          <figcaption>Sydney &amp; Joseph</figcaption>
+        </div>
+      </figure>
     </div>
   </div>
 </section>
