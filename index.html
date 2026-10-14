@@ -368,7 +368,7 @@
     margin: 0;
   }
   .polaroid {
-    padding: 12px 12px 18px;
+    padding: 12px;
     background: var(--white);
     box-shadow: 0 14px 32px rgba(43, 62, 39, 0.18);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -385,15 +385,6 @@
     aspect-ratio: 4 / 5;
     object-fit: cover;
   }
-  .polaroid figcaption {
-    padding-top: 14px;
-    text-align: center;
-    color: var(--green-deep);
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 20px;
-    font-style: italic;
-  }
-
   /* -------- RSVP -------- */
   .rsvp {
     background: var(--green-deep);
@@ -620,8 +611,7 @@
     .venue-name { font-size: clamp(25px, 7vw, 30px); }
     .venue-address { font-size: 15px; }
     .gallery-grid { gap: 28px; }
-    .polaroid { padding: 10px 10px 16px; }
-    .polaroid figcaption { padding-top: 12px; font-size: 19px; }
+    .polaroid { padding: 10px; }
     .rsvp-card { padding: 32px 22px; }
     .faq-q { font-size: 19px; }
     .faq-q > span:first-child { min-width: 0; }
@@ -760,19 +750,16 @@
       <figure class="gallery-card reveal">
         <div class="polaroid">
           <img src="images/gallery-1.jpg" alt="Sydney and Joseph walking hand in hand at Bethesda Terrace" loading="lazy" />
-          <figcaption>Sydney &amp; Joseph</figcaption>
         </div>
       </figure>
       <figure class="gallery-card reveal">
         <div class="polaroid">
           <img src="images/gallery-2.jpg" alt="Sydney and Joseph sharing a sunlit moment at Bethesda Terrace" loading="lazy" />
-          <figcaption>Sydney &amp; Joseph</figcaption>
         </div>
       </figure>
       <figure class="gallery-card reveal">
         <div class="polaroid">
           <img src="images/gallery-3.jpg" alt="Sydney and Joseph together at Bethesda Terrace" loading="lazy" />
-          <figcaption>Sydney &amp; Joseph</figcaption>
         </div>
       </figure>
     </div>
