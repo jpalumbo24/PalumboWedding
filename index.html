@@ -899,11 +899,23 @@
   revealEls.forEach(el => io.observe(el));
 
   // FAQ accordion
+  const faqItems = document.querySelectorAll('.faq-item');
+  const setFaqAnswerHeight = item => {
+    const answer = item.querySelector('.faq-a');
+    answer.style.maxHeight = item.classList.contains('open') ? `${answer.scrollHeight}px` : '0px';
+  };
+  faqItems.forEach(item => {
+    setFaqAnswerHeight(item);
+  });
   document.querySelectorAll('.faq-q').forEach(btn => {
     btn.addEventListener('click', () => {
       const item = btn.closest('.faq-item');
       item.classList.toggle('open');
+      setFaqAnswerHeight(item);
     });
+  });
+  window.addEventListener('resize', () => {
+    faqItems.forEach(setFaqAnswerHeight);
   });
 
   const rsvpForm = document.getElementById('rsvpForm');
