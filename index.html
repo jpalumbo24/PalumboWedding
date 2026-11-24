@@ -413,6 +413,12 @@
     text-transform: uppercase;
     color: rgba(255,255,255,0.82);
   }
+  .form-helper {
+    margin: 0;
+    font-size: 11px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.75);
+  }
   .form-choice-group {
     border: 0;
     padding: 0;
@@ -767,9 +773,11 @@
       >
         <div class="form-row">
           <label for="rsvpNames">Full Name(s)</label>
+          <p class="form-helper" id="rsvpNamesHelp">Please enter the full names of everyone attending, including yourself, separated by commas.</p>
           <input
             type="text"
             id="rsvpNames"
+            aria-describedby="rsvpNamesHelp"
             name="entry.1025580639"
             autocomplete="name"
             placeholder="Your name(s)"
